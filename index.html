@@ -68,7 +68,10 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            z-index: -999;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            border: none;
             opacity: 0;
         }
         .btn_prev {
@@ -402,7 +405,7 @@
 
         var pressTimer;
 
-        $(".nov_view").mouseup(function(){
+        $(".btn_step").mouseup(function(){
             clearTimeout(pressTimer);
             // Clear timeout
             return false;
