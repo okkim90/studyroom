@@ -68,10 +68,7 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            z-index: 9999;
-            width: 100%;
-            height: 100%;
-            border: none;
+            z-index: -999;
             opacity: 0;
         }
         .btn_prev {
@@ -138,7 +135,7 @@
 </head>
 <body>
     <div id="wrap">
-        <div id="nov_view" class="nov_view">
+        <div id="nov_view" class="nov_view" data-long-press-delay="800">
 
             <span class="nov_tit">1화</span>
             <div id="chapter_box0" class="chapter_box" data-chapter="0">
@@ -336,6 +333,7 @@
         <button class="btn_step" onclick="step()" data-chapter="" data-step=""></button>
         <button class="btn_prev" onclick="back()">&lt;</button>
     </div>
+    <script src="long-press-event.min.js"></script>
     <script>
         $(function(){
             $('.nov_view').on('click',function(){
@@ -405,21 +403,38 @@
 
         var pressTimer;
 
-        $(".btn_step").mouseup(function(){
-            clearTimeout(pressTimer);
-            // Clear timeout
-            return false;
-        }).mousedown(function(){
-            // Set timeout
-            pressTimer = window.setTimeout(function() {
-                alert('롱클릭!');
-            },800);
-            return false;
+        // $(".nov_view").mouseup(function(){
+        //     clearTimeout(pressTimer);
+        //     // Clear timeout
+        //     return false;
+        // }).mousedown(function(){
+        //     // Set timeout
+        //     pressTimer = window.setTimeout(function() {
+        //         alert('롱클릭!');
+        //     },800);
+        //     return false;
+        // });
+
+
+
+        // context 메뉴 출력시 호출되는 event handler
+        // window.oncontextmenu = function(event) {
+        // event.preventDefault(); // 기본 태그 기능 막기
+        // event.stopPropagation(); // 이벤트 전달 막기
+        // return false;
+        // };
+
+
+        var el = document.getElementById('nov_view');
+
+        // listen for the long-press event
+        el.addEventListener('long-press', function(e) {
+
+        // stop the event from bubbling up
+        e.preventDefault()
+
+        console.log(e.target);
         });
-
-
-
-
 
     </script>
 </body>
