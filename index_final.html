@@ -387,9 +387,11 @@
     <script>
         $(function(){
             $('.nov_view').on('click',function(){
-                step_next();
+
                 if(intervId){
                     stop_autoplay();
+                }else{
+                    step_next();
                 }
 
             });
@@ -414,7 +416,7 @@
             // stop the event from bubbling up
             autoplay();
             e.preventDefault();
-            e.stopPropagation();
+            $('.nov_view').focus();
 
 
         });
@@ -505,7 +507,7 @@
         function autoplay(){
             if (!intervId) {
                 intervId = setInterval(step_next,500);
-                $('.nov_view').focus();
+
                 console.log('자동재생 시작');
             }
         }
