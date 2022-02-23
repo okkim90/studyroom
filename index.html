@@ -95,6 +95,28 @@
             padding: 20px;
             box-sizing: border-box;
             overflow-y: auto;
+
+
+        }
+        .chapter_box::-webkit-scrollbar {
+            width: 10px;
+            position: relative;
+            z-index: 9999;
+        }
+        .chapter_box::-webkit-scrollbar-thumb {
+            background-color: #2f3542;
+            border-radius: 10px;
+            background-clip: padding-box;
+            border: 2px solid transparent;
+        }
+        .chapter_box::-webkit-scrollbar-track {
+            background-color: grey;
+            border-radius: 10px;
+            box-shadow: inset 0px 0px 5px white;
+        }
+        .chapter_box_inner {
+            overflow: hidden;
+            position: relative;
         }
         .chapter_box.on {
            visibility: visible;
@@ -139,70 +161,71 @@
 
             <span class="nov_tit">1화</span>
             <div id="chapter_box0" class="chapter_box" data-chapter="0">
-                <!--<div class="chap_bg" style="background-image: url(images/bg1.jpeg);"></div>-->
-                <span class="step ty_bg" style="background-image: url(images/bg1.jpeg);"></span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step ty_bg" style="background-image: url(images/bg3.jpg);"></span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step ty_bg" style="background-image: url(images/bg2.jpg);"></span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step ty_bg" style="background-image: url(images/bg1.jpeg);"></span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt left">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-                <span class="step txt right">testtset stsetstste</span>
-
+                <div class="chapter_box_inner">
+                    <!--<div class="chap_bg" style="background-image: url(images/bg1.jpeg);"></div>-->
+                    <span class="step ty_bg" style="background-image: url(images/bg1.jpeg);"></span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step ty_bg" style="background-image: url(images/bg3.jpg);"></span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step ty_bg" style="background-image: url(images/bg2.jpg);"></span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step ty_bg" style="background-image: url(images/bg1.jpeg);"></span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt left">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                    <span class="step txt right">testtset stsetstste</span>
+                </div>
             </div>
             <div id="chapter_box1" class="chapter_box" data-chapter="1">
                 <!--<div class="chap_bg" style="background-image: url(images/bg2.jpg);"></div>-->
@@ -349,7 +372,7 @@
             console.log($step);
             $('.step').eq($step)
             .addClass('on')
-            .parent('.chapter_box')
+            .parents('.chapter_box')
             .addClass('on')
             .siblings()
             .removeClass('on');
@@ -372,7 +395,7 @@
 
             if($step > 2){
                 $('.step').eq($step - 1)
-                .parent('.chapter_box')
+                .parents('.chapter_box')
                 .addClass('on')
                 .siblings()
                 .removeClass('on');
@@ -433,7 +456,7 @@
         // stop the event from bubbling up
         e.preventDefault()
 
-            alert('long press!!!');
+            console.log('long press!!!');
         });
 
     </script>
