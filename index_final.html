@@ -44,10 +44,16 @@
             font-size: 20px;
             line-height: 1.4;
         }
+
+
+
         .step.txt.default {
             text-align: center;
             font-weight: bold;
             font-style: italic;
+            background-color: rgba(255,255,255,.5);
+            border-radius: 10px;
+            padding: 10px;
         }
         .step.ty_bg {
             position: fixed;
@@ -74,10 +80,10 @@
             display: flex;
         }
 
-        .left {
+        .taL {
             text-align: left;
         }
-        .right {
+        .taR {
             text-align: right;
         }
         .btn_step {
@@ -180,6 +186,45 @@
             bottom: 0;
             z-index: 99;
         }
+
+        .script_box {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px 0;
+
+        }
+        .script_box.left {
+            padding-right: 15%;
+            justify-content: flex-start;
+        }
+        .script_box.right {
+            padding-left: 15%;
+            flex-direction: row-reverse;
+        }
+
+        .script_box .thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            border: 1px solid #333;
+            box-sizing: border-box;
+            background-color: #dcdcdc;
+            flex-shrink: 0;
+        }
+        .script_box .txt_box {
+
+            min-width: 0;
+        }
+        .script_box .txt_box .script {
+            text-align: left;
+        }
+        .script_box .txt_box .name {
+            display: block;
+            text-align: left;
+        }
+        .script_box.right .txt_box .name {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -193,16 +238,51 @@
                 <div class="chapter_box_inner">
                     <!--<div class="chap_bg" style="background-image: url(images/bg1.jpeg);"></div>-->
                     <div class="bg_area" data-bc="#dcdcdc" data-fc="#000">
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt default">
-                            것이었던 것이었던 것이었던 것이었다.
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
                         </span>
                         <span class="step txt default">
                             것이었던 것이었던 것이었던 것이었다.
@@ -216,33 +296,57 @@
                         <span class="step txt default">
                             것이었던 것이었던 것이었던 것이었다.
                         </span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
                         <span class="step txt default">
                             것이었던 것이었던 것이었던 것이었다.
                         </span>
-                        <span class="step txt default">
-                            것이었던 것이었던 것이었던 것이었다.
+
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
                         </span>
-                        <span class="step txt default">
-                            것이었던 것이었던 것이었던 것이었다.
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
                         </span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
                     </div>
                     <div class="bg_area" data-img="images/bg2.jpg" data-fc="#ff0">
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt default">
-                            것이었던 것이었던 것이었던 것이었다.
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
                         </span>
                         <span class="step txt default">
                             것이었던 것이었던 것이었던 것이었다.
@@ -256,21 +360,56 @@
                         <span class="step txt default">
                             것이었던 것이었던 것이었던 것이었다.
                         </span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
+                        <span class="step txt default">
+                            것이었던 것이었던 것이었던 것이었다.
+                        </span>
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
                     </div>
                     <div class="bg_area" data-img="images/bg3.jpg" data-fc="#0ff">
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt default">
-                            것이었던 것이었던 것이었던 것이었다.
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
                         </span>
                         <span class="step txt default">
                             것이었던 것이었던 것이었던 것이었다.
@@ -284,33 +423,80 @@
                         <span class="step txt default">
                             것이었던 것이었던 것이었던 것이었다.
                         </span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
+                        <span class="step txt default">
+                            것이었던 것이었던 것이었던 것이었다.
+                        </span>
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
                     </div>
                     <div class="bg_area"  data-img="images/bg1.jpeg" data-fc="#f00">
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt left">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
-                        <span class="step txt right">testtset stsetstste</span>
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box left">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">김영술</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
+                        <span class="step">
+                            <div class="script_box right">
+                                <span class="thumb"></span>
+                                <div class="txt_box">
+                                    <span class="name">주인공</span>
+                                    <span class="script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                    <span class="step script">오늘 11시 아식스 i4p 꼭 먹고싶습니다!</span>
+                                </div>
+                            </div>
+                        </span>
                     </div>
                 </div>
             </div>
