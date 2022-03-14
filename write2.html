@@ -184,20 +184,27 @@
         }
 
         .script_box {
-            display: flex;
-            align-items: flex-start;
+           position: relative;
             padding: 5px 0;
 
         }
         .script_box.left {
             padding-right: 15%;
+            padding-left: 60px;
             justify-content: flex-start;
         }
         .script_box.right {
             padding-left: 15%;
+            padding-right: 60px;
             flex-direction: row-reverse;
         }
 
+        .ty_talk {
+            margin-top: 30px;
+        }
+        .subordination.ty_talk {
+            margin-top: 0;
+        }
         .script_box .thumb {
             width: 50px;
             height: 50px;
@@ -206,6 +213,14 @@
             box-sizing: border-box;
             background-color: #dcdcdc;
             flex-shrink: 0;
+            position: absolute;
+            top: 0;
+        }
+        .script_box.left .thumb {
+            left: 0;
+        }
+        .script_box.right .thumb {
+            right: 0;
         }
         .script_box .txt_box {
 
@@ -228,7 +243,10 @@
         }
         .subordination .script_box .thumb {visibility: hidden;}
         .subordination .script_box .name {display: none;}
-
+        .script_box .cont_area {
+            background-color: #fff;
+            padding: 4px 0;
+        }
 
 
 
@@ -239,7 +257,7 @@
             height: 100%;
 
             box-sizing: border-box;
-            background-color: #fafafa;
+            background-color: #e5e5e5;
             overflow-y: auto;
             position: relative;
         }
@@ -285,12 +303,14 @@
             </div>
             <div class="input_wrap">
                 <div>
-                    <ul>
-                        <li><label for="common"><input type="radio" id="common" name="type" class="select_type" data-id="common" checked>그냥</label></li>
-                        <li><label for="p1"><input type="radio" id="p1" name="type" class="select_type cha main" data-name="주인공" data-id="p1" data-type="main">주인공</label></li>
-                        <li><label for="p2"><input type="radio" id="p2" name="type" class="select_type cha sub" data-name="사람1" data-id="p2" data-type="sub">사람1</label></li>
+                    <ul class="talker_list">
+                        <li><label for="common"><input type="radio" id="common" name="type" class="select_type" data-id="common" onchange="select_type();" checked>그냥</label></li>
+                        <li><label for="p1"><input type="radio" id="p1" name="type" class="select_type cha main" data-name="주인공"onchange="select_type();" data-id="p1" data-type="main">주인공</label></li>
+                        <li><label for="p2"><input type="radio" id="p2" name="type" class="select_type cha sub" data-name="사람1"onchange="select_type();" data-id="p2" data-type="sub">사람1</label></li>
+
                     </ul>
                     <button type="button" class="btn_add_type">추가</button>
+                    <input type="text" class="added_name">
                 </div>
                 <div>
                     <button type="button" class="btn_add_bg">배경적용</button>
@@ -354,9 +374,12 @@
                 //console.log($('#write_pos').position().top);
             });
 
-            $('.select_type').on('change',function(){
-                $('#write_pos').data('pos',$(this).data('id'));
-            });
+            function select_type(){
+                $('.select_type').on('change',function(){
+                    $('#write_pos').data('pos',$(this).data('id'));
+                });
+            }
+
 
 
             $('.input').keyup(function(e){
@@ -395,7 +418,7 @@
 
         function chk_script(){
             $('.ty_talk').each(function(){
-                if($(this).prev('.ty_talk').data('id') == $(this).data('id') || $(this).prev('#write_pos').data('pos') == $(this).data('id')){
+                if($(this).prev('.ty_talk').data('id') == $(this).data('id') || $(this).prev('#write_pos').prev('.ty_talk').data('id') == $(this).data('id')){
                     $(this).addClass('subordination')
                 }else{
                     $(this).removeClass('subordination')
@@ -403,6 +426,34 @@
 
             });
         }
+
+
+
+        $('.btn_add_type').on('click',function(){
+            var $val = $('.added_name').val();
+            var $id = $('.talker_list .cha').length + 1;
+
+
+            if(!$('.added_name').val() == ''){
+                if($('.talker_list').text().indexOf($val) > -1){
+                    alert('같은 이름이 존재합니다');
+                    $('.added_name').val('');
+                }else{
+                    $('.talker_list').append(
+                        '<li><label for="p'+ $id +'"><input type="radio" id="p'+ $id +'" name="type" class="select_type cha sub" data-name="'+ $val +'" data-id="p'+ $id +'" data-type="sub" onchange="select_type();" >'+ $val +'</label></li>'
+                    )
+                    $('.added_name').val('');
+                }
+            }
+
+
+
+
+
+
+
+        });
+
     </script>
 </body>
 </html>
