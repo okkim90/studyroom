@@ -192,11 +192,13 @@
             padding-right: 15%;
             padding-left: 60px;
             justify-content: flex-start;
+            text-align: left;
         }
         .script_box.right {
             padding-left: 15%;
             padding-right: 60px;
             flex-direction: row-reverse;
+            text-align: right;
         }
 
         .ty_talk {
@@ -222,10 +224,16 @@
         .script_box.right .thumb {
             right: 0;
         }
+
         .script_box .txt_box {
 
             min-width: 0;
             flex: 1;
+        }
+        .script_box .txt_box .cont_area {
+            text-align: left;
+            display: inline-block;
+            vertical-align: top;
         }
         .script_box .txt_box .script {
             text-align: left;
@@ -245,7 +253,7 @@
         .subordination .script_box .name {display: none;}
         .script_box .cont_area {
             background-color: #fff;
-            padding: 4px 0;
+            padding: 4px;
         }
 
 
