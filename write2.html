@@ -304,9 +304,9 @@
             <div class="input_wrap">
                 <div>
                     <ul class="talker_list">
-                        <li><label for="common"><input type="radio" id="common" name="type" class="select_type" data-id="common" onchange="select_type();" checked>그냥</label></li>
-                        <li><label for="p1"><input type="radio" id="p1" name="type" class="select_type cha main" data-name="주인공"onchange="select_type();" data-id="p1" data-type="main">주인공</label></li>
-                        <li><label for="p2"><input type="radio" id="p2" name="type" class="select_type cha sub" data-name="사람1"onchange="select_type();" data-id="p2" data-type="sub">사람1</label></li>
+                        <li><label for="common"><input type="radio" id="common" name="type" class="select_type" data-id="common" onclick="select_type(this);" checked>그냥</label></li>
+                        <li><label for="p1"><input type="radio" id="p1" name="type" class="select_type cha main" data-name="주인공"onclick="select_type(this);" data-id="p1" data-type="main">주인공</label></li>
+                        <li><label for="p2"><input type="radio" id="p2" name="type" class="select_type cha sub" data-name="사람1"onclick="select_type(this);" data-id="p2" data-type="sub">사람1</label></li>
 
                     </ul>
                     <button type="button" class="btn_add_type">추가</button>
@@ -374,11 +374,6 @@
                 //console.log($('#write_pos').position().top);
             });
 
-            function select_type(){
-                $('.select_type').on('change',function(){
-                    $('#write_pos').data('pos',$(this).data('id'));
-                });
-            }
 
 
 
@@ -440,19 +435,22 @@
                     $('.added_name').val('');
                 }else{
                     $('.talker_list').append(
-                        '<li><label for="p'+ $id +'"><input type="radio" id="p'+ $id +'" name="type" class="select_type cha sub" data-name="'+ $val +'" data-id="p'+ $id +'" data-type="sub" onchange="select_type();" >'+ $val +'</label></li>'
+                        '<li><label for="p'+ $id +'"><input type="radio" id="p'+ $id +'" name="type" class="select_type cha sub" data-name="'+ $val +'" data-id="p'+ $id +'" data-type="sub" onclick="select_type(this);" >'+ $val +'</label></li>'
                     )
                     $('.added_name').val('');
                 }
             }
 
-
-
-
-
-
-
         });
+
+        function select_type(e){
+                var $target = $(e);
+
+                $('#write_pos').data('pos',$target.data('id'));
+                console.log($('#write_pos').data('pos'));
+
+            }
+
 
     </script>
 </body>
