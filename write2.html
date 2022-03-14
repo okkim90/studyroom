@@ -186,7 +186,7 @@
         .script_box {
             display: flex;
             align-items: flex-start;
-            padding: 20px 0;
+            padding: 5px 0;
 
         }
         .script_box.left {
@@ -222,6 +222,12 @@
         .script_box.right .txt_box .name {
             text-align: right;
         }
+        .subordination .script_box {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .subordination .script_box .thumb {visibility: hidden;}
+        .subordination .script_box .name {display: none;}
 
 
 
@@ -309,68 +315,42 @@
                     }
                     $('.cha').each(function(){
                         if($(this).prop('checked')){
-                            if($pos.data('pos') == $pos.prev('.step').data('id')){
-                                $pos.prev('.step').find('.script:last-child').after(
-                                    '<span class="step script"><span class="cont_area" onclick="pos_change(this); return false">' + $cont +'</span><button type="button" class="btn_del" onclick="del(this);">X</button></span>'
+                            if($(this).data('type')=='main'){
+                                $pos.before(
+                                    '<span class="view_sec step ty_talk main"   data-id='+$(this).data("id")+'>'+
+                                        '<div class="script_box right">'+
+                                            '<span class="thumb"></span>'+
+                                            '<div class="txt_box">'+
+                                                '<span class="name">'+$(this).data("name")+'</span>'+
+                                                '<div class="script_list">'+
+                                                    '<button type="button" class="btn_del" onclick="del(this);">X</button> <span class="script"><span class="cont_area" onclick="pos_change(this); return false">' + $cont +'</span></span>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</span>'
                                 )
-                            }
-                            else if($pos.data('pos') == $pos.parents('.step').data('id')){
-                                $pos.before('<span class="step script"><span class="cont_area" onclick="pos_change(this); return false">' + $cont +'</span><button type="button" class="btn_del" onclick="del(this);">X</button></span>');
-                            }
-                            else{
-                                if($pos.parents('.view_sec').hasClass('ty_talk')){
-                                    // var nextEls = $pos.nextAll('.step');
-                                    // var beforeId = $pos.parents('.view_sec').data('id');
-                                    var currentEl = $pos.parents('.view_sec');
-                                    var copyEl = $pos.parents('.view_sec').clone();
-                                    copyEl.find('#write_pos').prevAll('.script').remove();
-                                    copyEl.find('#write_pos').remove();
-                                    $pos.parents('.view_sec').find('#write_pos').nextAll('.script').remove();
-
-                                    //console.log(copyEl);
-
-                                    $pos.parents('.view_sec').after(copyEl);
-
-                                    $pos.insertAfter(currentEl);
-
-                                }else{
-                                    if($(this).data('type')=='main'){
-                                        $pos.before(
-                                            '<span class="view_sec step ty_talk main"   data-id='+$(this).data("id")+'>'+
-                                                '<div class="script_box right">'+
-                                                    '<span class="thumb"></span>'+
-                                                    '<div class="txt_box">'+
-                                                        '<span class="name">'+$(this).data("name")+'</span>'+
-                                                        '<div class="script_list">'+
-                                                            '<button type="button" class="btn_del">X</button> <span class="script"><span class="cont_area" onclick="pos_change(this); return false">' + $cont +'</span></span>'+
-                                                        '</div>'+
-                                                    '</div>'+
+                            }else{
+                                $pos.before(
+                                    '<span class="view_sec step ty_talk sub"   data-id='+$(this).data("id")+'>'+
+                                        '<div class="script_box left">'+
+                                            '<span class="thumb"></span>'+
+                                            '<div class="txt_box">'+
+                                                '<span class="name">'+$(this).data("name")+'</span>'+
+                                                '<div class="script_list">'+
+                                                    '<span class="script" ><span class="cont_area" onclick="pos_change(this); return false">' + $cont +'</span><button type="button" class="btn_del" onclick="del(this);">X</button></span>'+
                                                 '</div>'+
-                                            '</span>'
-                                        )
-                                    }else{
-                                        $pos.before(
-                                            '<span class="view_sec step ty_talk main"   data-id='+$(this).data("id")+'>'+
-                                                '<div class="script_box left">'+
-                                                    '<span class="thumb"></span>'+
-                                                    '<div class="txt_box">'+
-                                                        '<span class="name">'+$(this).data("name")+'</span>'+
-                                                        '<div class="script_list">'+
-                                                            '<span class="script"><span class="cont_area" onclick="pos_change(this); return false">' + $cont +'</span><button type="button" class="btn_del" onclick="del(this);">X</button></span>'+
-                                                        '</div>'+
-                                                    '</div>'+
-                                                '</div>'+
-                                            '</span>'
-                                        )
-                                    }
-                                }
+                                            '</div>'+
+                                        '</div>'+
+                                    '</span>'
+                                )
                             }
                         }
                     });
 
                 }
                 $('.input').val(null);
-                $('#nov_write').scrollTop($('#write_pos').position().top);
+                //$('#nov_write').scrollTop($('#write_pos').position().top);
+                chk_script();
                 //console.log($('#write_pos').position().top);
             });
 
@@ -395,23 +375,33 @@
 
             });
 
+
         });
         function pos_change(e){
 
             var $target = $(e);
-
-            if($target.parent('.script').hasClass('step')){
-                $pos.insertBefore($target.parent('.script'));
-            }else{
-                $pos.insertBefore($target.parents('.view_sec'));
-            }
+            $pos.insertBefore($target.parents('.view_sec'));
             $('#nov_write').scrollTop($('#write_pos').position().top);
+
+
         }
         function del(e){
 
             var $target = $(e);
-            $target.parent().remove();
+            $target.parents('.step').remove();
+            //e.stopPropagation();
+            chk_script()
+        }
 
+        function chk_script(){
+            $('.ty_talk').each(function(){
+                if($(this).prev('.ty_talk').data('id') == $(this).data('id') || $(this).prev('#write_pos').data('pos') == $(this).data('id')){
+                    $(this).addClass('subordination')
+                }else{
+                    $(this).removeClass('subordination')
+                }
+
+            });
         }
     </script>
 </body>
