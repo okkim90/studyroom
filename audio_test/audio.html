@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+        .audio_list li.on .btn {
+            background-color: #f00;
+            color: #fff;
+        }
+        .btn {
+            width: 30px;
+            height: 30px;
+            background-color: #dcdcdc;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 10px;
+        }
+        .audio_item {
+            font-size: 16px;
+            line-height: 30px;
+        }
+        .audio_item + .audio_item {
+            margin-top: 20px;
+        }
+        .audio_item.on {
+            font-weight: bold;
+            color: #f00;
+        }
+        #wrap {
+            padding: 40px;
+        }
+        .desc {
+            padding: 50px;
+
+        }
+        .player_box {padding: 50px 0;}
+        .control_box {
+            margin-top: 10px;
+        }
+        #myaudio {
+            width: 100%;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <h1>오디오 재생 테스트</h1>
+        <ol class="desc">
+            <li>전체재생</li>
+            <li>리스트 클릭시 재생</li>
+            <li>재생 끝나면 다음 화로 자동재생 (1초 텀)</li>
+            <li>-5, +5초 타임라인 이동 기능</li>
+            <li>볼륨조절</li>
+        </ol>
+        <hr>
+        <div class="player_box">
+            <!-- <select name=mylist id=mylist onChange="playAudio();">
+                <option id="1" value="mp3-sample1.mp3">MP3
+                <option id="5" value="mp3-sample2.mp3">WAV
+                <option id="6" value="mp3-sample3.mp3">OOG
+            </select> -->
+            <ul class="audio_list">
+                <li class="audio_item on">홀리몰리과카몰리 <button class="btn" onclick="playAudio(0);"></button></li>
+                <li class="audio_item">쿠쿠루삥뽕<button class="btn" onclick="playAudio(1);"></button></li>
+                <li class="audio_item">님혹시증발물?<button class="btn" onclick="playAudio(2);"></button></li>
+                <li class="audio_item">어쩔시크릿쥬쥬리미티드에디션<button class="btn" onclick="playAudio(3);"></button></li>
+            </ul>
+
+        </div>
+        <!-- <audio id="myaudio" controls="controls" preload="auto">
+            <source id="1" src="audio1.mp3" type="audio/mpeg">
+            HTML5 audio not supported
+        </audio> -->
+
+        <div class="audio-player">
+            <div class="timeline">
+              <div class="progress"></div>
+            </div>
+            <div class="controls">
+              <div class="play-container">
+                <div class="toggle-play play">
+              </div>
+              </div>
+              <div class="time">
+                <div class="current">0:00</div>
+                <div class="divider">/</div>
+                <div class="length"></div>
+              </div>
+              <div class="name"></div>
+          <!--     credit for icon to https://saeedalipoor.github.io/icono/ -->
+              <div class="volume-container">
+                <div class="volume-button">
+                  <div class="volume icono-volumeMedium"></div>
+                </div>
+
+                <div class="volume-slider">
+                  <div class="volume-percentage"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="control_box">
+            <button onclick="rewindAudio()">prev -5</button>
+            <button onclick="forwardAudio()">next +5</button>
+        </div>
+    </div>
+
+
+    <script>
+
+        var audios = [
+            {
+                "url":"audio1.mp3",
+                "title":"홀리몰리과카몰리",
+            },
+            {
+                "url":"audio2.mp3",
+                "title":"쿠쿠루삥뽕",
+            },
+            {
+                "url":"audio3.mp3",
+                "title":"님혹시증발물?",
+            },
+            {
+                "url":"audio4.mp3",
+                "title":"어쩔시크릿쥬쥬리미티드에디션",
+            }
+        ]
+
+
+
+        var currentVal = 0;
+        var currentFile = ""; //Global variable to track current file
+        var oAudio = document.getElementById('myaudio');
+        var btn = document.getElementById('play');
+        var audioURL = document.getElementById('mylist'); //Skip loading if current file hasn’t changed.
+        function playAudio(val) {
+            // Check for audio element support.
+            if (window.HTMLAudioElement) {
+                try {
+                    var url = audios[val].url;
+
+                    if (url !== currentFile) {
+                        oAudio.src = url;
+                        audio.src = url;
+                        currentFile = url;
+                        currentVal = val;
+                    }
+                    if (oAudio.paused) {
+                        //oAudio.play();
+                        audio.play();
+                    }
+                    else {
+                       // oAudio.pause();
+                    }
+
+                    //console.log(url);
+                    $('.audio_item').removeClass('on').eq(currentVal).addClass('on');
+                }
+                catch (e) {
+                    // Fail silently but show in F12 developer tools console
+                    if(window.console && console.error("Error:" + e));
+                }
+            }
+        }
+
+
+        // 15초 뒤로
+        function rewindAudio() {
+            // Check for audio element support.
+            if (window.HTMLAudioElement) {
+                try {
+                    oAudio.currentTime -= 5.0;
+                }
+                catch (e) {
+                    // Fail silently but show in F12 developer tools console
+                    if(window.console && console.error("Error:" + e));
+                }
+            }
+        }
+
+        // 15초 앞으로
+        function forwardAudio() {
+            // Check for audio element support.
+            if (window.HTMLAudioElement) {
+                try {
+                    oAudio.currentTime += 5.0;
+                }
+                catch (e) {
+                    // Fail silently but show in F12 developer tools console
+                    if(window.console && console.error("Error:" + e));
+                }
+            }
+        }
+
+
+        // 정지
+        function AudioStop()
+        {
+            oAudio.Stop();
+        }
+
+
+        function Previous(){
+
+        }
+
+
+        oAudio.onended = function(){
+            console.log('123123');
+            if(currentVal < $('.audio_item').length -1){
+                currentVal += 1;
+                //$('.audio_item').eq(currentVal).
+                console.log(currentVal);
+                setTimeout(function(){
+                    playAudio(currentVal);
+                },1000)
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const audioPlayer = document.querySelector(".audio-player");
+        const audio = new Audio(
+        "audio1.mp3"
+        );
+        //credit for song: Adrian kreativaweb@gmail.com
+
+        //console.dir(audio);
+
+
+
+
+        audio.addEventListener(
+        "loadeddata",
+        () => {
+            audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
+            audio.duration
+            );
+            audio.volume = .75;
+        },
+        false
+        );
+
+        //click on timeline to skip around
+        const timeline = audioPlayer.querySelector(".timeline");
+        timeline.addEventListener("click", e => {
+        const timelineWidth = window.getComputedStyle(timeline).width;
+        const timeToSeek = e.offsetX / parseInt(timelineWidth) * audio.duration;
+        audio.currentTime = timeToSeek;
+        }, false);
+
+        //click volume slider to change volume
+        const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
+        volumeSlider.addEventListener('click', e => {
+        const sliderWidth = window.getComputedStyle(volumeSlider).width;
+        const newVolume = e.offsetX / parseInt(sliderWidth);
+        audio.volume = newVolume;
+        audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
+        }, false)
+
+        //check audio percentage and update time accordingly
+        setInterval(() => {
+        const progressBar = audioPlayer.querySelector(".progress");
+        progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
+        audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
+            audio.currentTime
+        );
+        }, 100);
+
+        //toggle between playing and pausing on button click
+        const playBtn = audioPlayer.querySelector(".controls .toggle-play");
+        playBtn.addEventListener(
+        "click",
+        () => {
+            if (audio.paused) {
+            playBtn.classList.remove("play");
+            playBtn.classList.add("pause");
+            audio.play();
+            } else {
+            playBtn.classList.remove("pause");
+            playBtn.classList.add("play");
+            audio.pause();
+            }
+        },
+        false
+        );
+
+        audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
+        const volumeEl = audioPlayer.querySelector(".volume-container .volume");
+        audio.muted = !audio.muted;
+        if (audio.muted) {
+            volumeEl.classList.remove("icono-volumeMedium");
+            volumeEl.classList.add("icono-volumeMute");
+        } else {
+            volumeEl.classList.add("icono-volumeMedium");
+            volumeEl.classList.remove("icono-volumeMute");
+        }
+        });
+
+        //turn 128 seconds into 2:08
+        function getTimeCodeFromNum(num) {
+        let seconds = parseInt(num);
+        let minutes = parseInt(seconds / 60);
+        seconds -= minutes * 60;
+        const hours = parseInt(minutes / 60);
+        minutes -= hours * 60;
+
+        if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+        return `${String(hours).padStart(2, 0)}:${minutes}:${String(
+            seconds % 60
+        ).padStart(2, 0)}`;
+        }
+
+
+
+        audio.onended = function(){
+            //console.log('123123');
+            if(currentVal < $('.audio_item').length -1){
+                currentVal += 1;
+                //$('.audio_item').eq(currentVal).
+                console.log(currentVal);
+                setTimeout(function(){
+                    playAudio(currentVal);
+                },1000)
+
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <h1>오디오 재생 테스트</h1>
+        <ol class="desc">
+            <li>전체재생</li>
+            <li>리스트 클릭시 재생</li>
+            <li>재생 끝나면 다음 화로 자동재생 (1초 텀)</li>
+            <li>-5, +5초 타임라인 이동 기능</li>
+            <li>볼륨조절</li>
+            <li>재생속도 컨트롤</li>
+        </ol>
+        <hr>
+        <div class="player_box">
+            <ul class="audio_list">
+                <li class="audio_item">
+                    홀리몰리과카몰리
+                    <button class="btn" onclick="playAudio(0);">
+                        <div class="equalizer_set">
+                            <span class="equalizer_bar bar1"></span>
+                            <span class="equalizer_bar bar2"></span>
+                            <span class="equalizer_bar bar3"></span>
+                            <span class="equalizer_bar bar4"></span>
+                        </div>
+                    </button>
+                </li>
+                <li class="audio_item">
+                    쿠쿠루삥뽕
+                    <button class="btn" onclick="playAudio(1);">
+                        <div class="equalizer_set">
+                            <span class="equalizer_bar bar1"></span>
+                            <span class="equalizer_bar bar2"></span>
+                            <span class="equalizer_bar bar3"></span>
+                            <span class="equalizer_bar bar4"></span>
+                        </div>
+                    </button>
+                </li>
+                <li class="audio_item">
+                    님혹시증발물?
+                    <button class="btn" onclick="playAudio(2);">
+                        <div class="equalizer_set">
+                            <span class="equalizer_bar bar1"></span>
+                            <span class="equalizer_bar bar2"></span>
+                            <span class="equalizer_bar bar3"></span>
+                            <span class="equalizer_bar bar4"></span>
+                        </div>
+                    </button>
+                </li>
+                <li class="audio_item">
+                    어쩔시크릿쥬쥬리미티드에디션
+                    <button class="btn" onclick="playAudio(3);">
+                        <div class="equalizer_set">
+                            <span class="equalizer_bar bar1"></span>
+                            <span class="equalizer_bar bar2"></span>
+                            <span class="equalizer_bar bar3"></span>
+                            <span class="equalizer_bar bar4"></span>
+                        </div>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="audio-player">
+            <div class="timeline">
+                <div class="progress"></div>
+            </div>
+            <div class="controls">
+                <div class="play-container">
+                    <div class="toggle-play play"></div>
+                </div>
+                <div class="name">
+                    <marquee id="marquee" >
+                        <div class="marquee_inner">
+                            재생중인 오디오가 없습니다.
+                        </div>
+                    </marquee>
+                </div >
+                <div class="time">
+                    <div class="current">0:00</div>
+                    <div class="divider">/</div>
+                    <div class="length"></div>
+                </div>
+
+                <div class="volume-container">
+
+                    <div class="volume-slider">
+                        <div class="volume-percentage"></div>
+                    </div>
+                    <div class="volume-button">
+                        <div class="volume icono-volumeMedium"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="control_box">
+            <button onclick="rewindAudio()">prev -5</button>
+            <button onclick="forwardAudio()">next +5</button>
+            &nbsp;
+            <span>
+                재생속도
+                <select name="" id="" onchange="speed(this)">
+                    <option value="0.25">0.25</option>
+                    <option value="0.5">0.5</option>
+                    <option value="0.75">0.75</option>
+                    <option value="1" selected>1</option>
+                    <option value="1.25">1.25</option>
+                    <option value="1.5">1.5</option>
+                    <option value="1.75">1.75</option>
+                    <option value="2">2</option>
+                </select>
+            </span>
+
+        </div>
+    </div>
+    <script>
+        var audios = [
+            {
+                "url":"audio1.mp3",
+                "title":"홀리몰리과카몰리",
+            },
+            {
+                "url":"audio2.mp3",
+                "title":"쿠쿠루삥뽕",
+            },
+            {
+                "url":"audio3.mp3",
+                "title":"님혹시증발물?",
+            },
+            {
+                "url":"audio4.mp3",
+                "title":"어쩔시크릿쥬쥬리미티드에디션",
+            }
+        ]
+
+        const audioPlayer = document.querySelector(".audio-player");
+        const audio = new Audio(
+        "audio1.mp3"
+        );
+
+        audio.addEventListener("loadeddata",() => {
+            audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
+            audio.duration
+            );
+            audio.volume = .75;
+        }, false);
+
+        //click on timeline to skip around
+        const timeline = audioPlayer.querySelector(".timeline");
+        timeline.addEventListener("click", e => {
+            const timelineWidth = window.getComputedStyle(timeline).width;
+            const timeToSeek = e.offsetX / parseInt(timelineWidth) * audio.duration;
+            audio.currentTime = timeToSeek;
+        }, false);
+
+        //click volume slider to change volume
+        const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
+        volumeSlider.addEventListener('click', e => {
+            const sliderWidth = window.getComputedStyle(volumeSlider).width;
+            const newVolume = e.offsetX / parseInt(sliderWidth);
+            audio.volume = newVolume;
+            audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
+        }, false)
+
+        //check audio percentage and update time accordingly
+        setInterval(() => {
+            const progressBar = audioPlayer.querySelector(".progress");
+            progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
+            audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
+            audio.currentTime
+        );
+        }, 50);
+
+        //toggle between playing and pausing on button click
+        const playBtn = audioPlayer.querySelector(".controls .toggle-play");
+        playBtn.addEventListener("click",() => {
+            if (audio.paused) {
+                playBtn.classList.remove("play");
+                playBtn.classList.add("pause");
+                play();
+            } else {
+                playBtn.classList.remove("pause");
+                playBtn.classList.add("play");
+                pause();
+            }
+        },false);
+
+        audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
+            const volumeEl = audioPlayer.querySelector(".volume-container .volume");
+            audio.muted = !audio.muted;
+            if (audio.muted) {
+                volumeEl.classList.remove("icono-volumeMedium");
+                volumeEl.classList.add("icono-volumeMute");
+            } else {
+                volumeEl.classList.add("icono-volumeMedium");
+                volumeEl.classList.remove("icono-volumeMute");
+            }
+        });
+
+        //turn 128 seconds into 2:08
+        function getTimeCodeFromNum(num) {
+        let seconds = parseInt(num);
+        let minutes = parseInt(seconds / 60);
+        seconds -= minutes * 60;
+        const hours = parseInt(minutes / 60);
+        minutes -= hours * 60;
+
+        if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+        return `${String(hours).padStart(2, 0)}:${minutes}:${String(
+            seconds % 60
+        ).padStart(2, 0)}`;
+        }
+
+
+
+        var currentVal = 0;
+        var currentFile = "";
+        var audioName = audios[currentVal].title;
+        var play_speed = 1;
+        function playAudio(val) {
+            var url = audios[val].url;
+            var name = audios[val].title;
+            //console.log(name);
+
+            if (url !== currentFile) {
+                audio.src = url;
+                audioName = name;
+                currentFile = url;
+                currentVal = val;
+
+                //$('.name').text(audioName);
+
+            }
+            if (audio.paused) {
+                //oAudio.play();
+                audio.playbackRate = play_speed;
+                play();
+
+            }else{
+
+                pause();
+            }
+        }
+
+
+        function play(){
+            clearAutoplay();
+            audio.play();
+            playBtn.classList.add("pause");
+            playBtn.classList.remove("play");
+            $('.audio_item').removeClass('on');
+            $('.audio_item .btn').removeClass('on');
+            $('.audio_item').eq(currentVal).addClass('on').find('.btn').addClass('on');
+            $('.name').html(
+                '<marquee id="marquee" >'+
+                    '<div class="marquee_inner">'+
+                        audioName +
+                    '</div>'+
+                '</marquee>'
+            );
+            console.log(audioName);
+
+        }
+
+        function pause(){
+            audio.pause();
+            playBtn.classList.remove("pause");
+            playBtn.classList.add("play");
+            $('.audio_item .btn').removeClass('on');
+
+        }
+
+
+
+
+
+        // 15초 뒤로
+        function rewindAudio() {
+            if (window.HTMLAudioElement) {
+                try {
+                    audio.currentTime -= 5.0;
+                }
+                catch (e) {
+                    if(window.console && console.error("Error:" + e));
+                }
+            }
+        }
+
+        // 15초 앞으로
+        function forwardAudio() {
+            if (window.HTMLAudioElement) {
+                try {
+                    audio.currentTime += 5.0;
+                }
+                catch (e) {
+                    if(window.console && console.error("Error:" + e));
+                }
+            }
+        }
+
+
+        // 정지
+        function AudioStop()
+        {
+            //audio.Stop();
+        }
+
+
+        function speed(e){
+            var $val = $(e).val();
+            //console.log($val);
+            play_speed = $val
+            audio.playbackRate = play_speed;
+        }
+
+
+        var $autoplay;
+        function autoplay(){
+            $autoplay = setTimeout(function(){
+                playAudio(currentVal);
+            },1000);
+        }
+        function clearAutoplay(){
+            clearTimeout($autoplay);
+        }
+
+
+        audio.onended = function(){
+            //console.log('123123');
+            if(currentVal < $('.audio_item').length -1){
+
+                //$('.audio_item').eq(currentVal).
+                //console.log(currentVal);
+                currentVal += 1;
+                playBtn.classList.remove("pause");
+                playBtn.classList.add("play");
+                autoplay();
+
+            }else{
+                playBtn.classList.remove("pause");
+                playBtn.classList.add("play");
+            }
+            $('.audio_item .btn').removeClass('on');
+        }
+    </script>
+</body>
+</html>

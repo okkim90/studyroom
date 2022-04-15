@@ -377,7 +377,7 @@
 
                 }
                 $('.input').val(null);
-                //$('#nov_write').scrollTop($('#write_pos').position().top);
+                $('#nov_write').scrollTop($('#write_pos').position().top);
                 chk_script();
                 //console.log($('#write_pos').position().top);
             });
@@ -407,7 +407,7 @@
 
             var $target = $(e);
             $pos.insertBefore($target.parents('.view_sec'));
-            $('#nov_write').scrollTop($('#write_pos').position().top);
+            //$('#nov_write').scrollTop($('#write_pos').position().top);
 
 
         }
