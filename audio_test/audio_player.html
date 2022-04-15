@@ -253,21 +253,24 @@
 
 
         function play(){
-            clearAutoplay();
-            audio.play();
-            playBtn.classList.add("pause");
-            playBtn.classList.remove("play");
-            $('.audio_item').removeClass('on');
-            $('.audio_item .btn').removeClass('on');
-            $('.audio_item').eq(currentVal).addClass('on').find('.btn').addClass('on');
-            $('.name').html(
-                '<marquee id="marquee" >'+
-                    '<div class="marquee_inner">'+
-                        audioName +
-                    '</div>'+
-                '</marquee>'
-            );
-            console.log(audioName);
+            if (window.HTMLAudioElement) {
+                clearAutoplay();
+                audio.play();
+                playBtn.classList.add("pause");
+                playBtn.classList.remove("play");
+                $('.audio_item').removeClass('on');
+                $('.audio_item .btn').removeClass('on');
+                $('.audio_item').eq(currentVal).addClass('on').find('.btn').addClass('on');
+                $('.name').html(
+
+                        '<div class="marquee_inner">'+
+                            audioName +
+                        '</div>'
+
+                );
+                console.log(audioName);
+            }
+
 
         }
 
