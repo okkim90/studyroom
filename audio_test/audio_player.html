@@ -268,11 +268,11 @@
                 $('.audio_item .btn').removeClass('on');
                 $('.audio_item').eq(currentVal).addClass('on').find('.btn').addClass('on');
                 $('.name').html(
-
+                    '<marquee>'+
                         '<div class="marquee_inner">'+
                             audioName +
-                        '</div>'
-
+                        '</div>'+
+                    '</marquee>'
                 );
                 console.log(audioName);
             }
