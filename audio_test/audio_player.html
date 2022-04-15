@@ -69,12 +69,11 @@
                 </li>
             </ul>
         </div>
-        <audio src="" style="visibility: hidden;">
-            <source src="audio1.mp3">
-            <source src="audio2.mp3">
-            <source src="audio3.mp3">
-            <source src="audio4.mp3">
-        </audio>
+        <audio src="audio1.mp3" style="visibility: hidden;"></audio>
+        <audio src="audio2.mp3" style="visibility: hidden;"></audio>
+        <audio src="audio3.mp3" style="visibility: hidden;"></audio>
+        <audio src="audio4.mp3" style="visibility: hidden;"></audio>
+        <audio src="audio5.mp3" style="visibility: hidden;"></audio>
         <div class="audio-player">
             <div class="timeline">
                 <div class="progress"></div>
@@ -154,6 +153,11 @@
         const audio = new Audio(
         "audio1.mp3"
         );
+
+
+        var networkState = audio.readyState;
+        console.log('networkState', networkState);
+
 
         audio.addEventListener("loadeddata",() => {
             audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
