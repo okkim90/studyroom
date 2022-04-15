@@ -265,7 +265,7 @@
 
 
         function play(){
-            if (window.HTMLAudioElement) {
+            audio.addEventListener("canplaythrough", function() {
                 clearAutoplay();
                 audio.play();
                 playBtn.classList.add("pause");
@@ -281,8 +281,8 @@
                     '</marquee>'
                 );
                 console.log(audioName);
-            }
 
+            });
 
         }
 
