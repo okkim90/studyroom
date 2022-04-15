@@ -82,8 +82,8 @@ ul { list-style: none; }
 
 .audio-player .controls .volume-container .volume-slider .volume-percentage { background: coral; height: 100%; width: 75%; }
 
-.audio-player .controls .name { display: block; width: 100px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.audio-player .name { display: block; width: 100%; padding: 15px 30px 0; -webkit-box-sizing: border-box; box-sizing: border-box; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
 
-.audio-player .controls .name marquee { display: block; }
+.audio-player .name marquee { display: block; }
 
-.audio-player .controls .name .marquee_inner { display: block; }
+.audio-player .name .marquee_inner { display: block; }
