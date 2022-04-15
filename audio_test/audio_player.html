@@ -69,6 +69,12 @@
                 </li>
             </ul>
         </div>
+        <audio src="" style="visibility: hidden;">
+            <source src="audio1.mp3">
+            <source src="audio2.mp3">
+            <source src="audio3.mp3">
+            <source src="audio4.mp3">
+        </audio>
         <div class="audio-player">
             <div class="timeline">
                 <div class="progress"></div>
@@ -178,7 +184,7 @@
             audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
             audio.currentTime
         );
-        }, 10);
+        }, 50);
 
         //toggle between playing and pausing on button click
         const playBtn = audioPlayer.querySelector(".controls .toggle-play");
