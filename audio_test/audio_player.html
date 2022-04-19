@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a9123cc962.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 
@@ -102,13 +103,12 @@
                         <div class="volume-percentage"></div>
                     </div>
                     <div class="volume-button">
-                        <div class="volume icono-volumeMedium"></div>
+                        <i class="volume fa-solid fa-volume-high"></i>
                     </div>
                 </div>
             </div>
 
         </div>
-
         <div class="control_box">
             <button onclick="rewindAudio()">prev -5</button>
             <button onclick="forwardAudio()">next +5</button>
@@ -128,6 +128,7 @@
             </span>
 
         </div>
+        <div class="volume_txt"></div>
     </div>
     <script>
         var audios = [
@@ -147,16 +148,16 @@
                 "url":"audio5.mp3",
                 "title":"어쩔시크릿쥬쥬리미티드에디션",
             }
-        ]
+        ];
 
         const audioPlayer = document.querySelector(".audio-player");
         const audio = new Audio(
-        "audio1.mp3"
+            "audio1.mp3"
         );
 
 
-        var networkState = audio.readyState;
-        console.log('networkState', networkState);
+        //var networkState = audio.readystate;
+        //console.log('networkState', networkState);
 
 
         audio.addEventListener("loadeddata",() => {
@@ -176,10 +177,14 @@
 
         //click volume slider to change volume
         const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
+        const volume_txt = document.querySelector(".volume_txt");
         volumeSlider.addEventListener('click', e => {
             const sliderWidth = window.getComputedStyle(volumeSlider).width;
             const newVolume = e.offsetX / parseInt(sliderWidth);
             audio.volume = newVolume;
+
+            volume_txt.innerHTML = newVolume;
+
             audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
         }, false)
 
@@ -210,11 +215,11 @@
             const volumeEl = audioPlayer.querySelector(".volume-container .volume");
             audio.muted = !audio.muted;
             if (audio.muted) {
-                volumeEl.classList.remove("icono-volumeMedium");
-                volumeEl.classList.add("icono-volumeMute");
+                volumeEl.classList.remove("fa-volume-high");
+                volumeEl.classList.add("fa-volume-xmark");
             } else {
-                volumeEl.classList.add("icono-volumeMedium");
-                volumeEl.classList.remove("icono-volumeMute");
+                volumeEl.classList.remove("fa-volume-xmark");
+                volumeEl.classList.add("fa-volume-high");
             }
         });
 
@@ -265,7 +270,6 @@
 
 
         function play(){
-
                 clearAutoplay();
                 audio.play();
                 playBtn.classList.add("pause");
