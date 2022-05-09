@@ -23,6 +23,9 @@
             <li>-5, +5초 타임라인 이동 기능</li>
             <li>볼륨조절</li>
             <li>재생속도 컨트롤</li>
+            <li></li>
+            <li>[추가] 리스트에 각 오디오 재생시간 노출</li>
+            <li>[추가] 프로그래스바 스와이프 컨트롤 기능 추가</li>
         </ol>
         <hr>
         <div class="player_box">
@@ -217,6 +220,7 @@
         $('.slider').slider({
 
             value: 0,
+            step: 0.1,
             min: 0,
             range:"min",
             max: audioTime,
