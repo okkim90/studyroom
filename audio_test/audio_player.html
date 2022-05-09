@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://kit.fontawesome.com/a9123cc962.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -25,7 +27,7 @@
         <div class="player_box">
             <ul class="audio_list">
                 <li class="audio_item">
-                    홀리몰리과카몰리
+                    홀리몰리과카몰리 <div class="audioDu"></div>
                     <button class="btn" onclick="playAudio(0);">
                         <div class="equalizer_set">
                             <span class="equalizer_bar bar1"></span>
@@ -34,9 +36,10 @@
                             <span class="equalizer_bar bar4"></span>
                         </div>
                     </button>
+
                 </li>
                 <li class="audio_item">
-                    쿠쿠루삥뽕
+                    쿠쿠루삥뽕 <div class="audioDu"></div>
                     <button class="btn" onclick="playAudio(1);">
                         <div class="equalizer_set">
                             <span class="equalizer_bar bar1"></span>
@@ -47,7 +50,7 @@
                     </button>
                 </li>
                 <li class="audio_item">
-                    님혹시증발물?
+                    님혹시증발물? <div class="audioDu"></div>
                     <button class="btn" onclick="playAudio(2);">
                         <div class="equalizer_set">
                             <span class="equalizer_bar bar1"></span>
@@ -58,7 +61,7 @@
                     </button>
                 </li>
                 <li class="audio_item">
-                    어쩔시크릿쥬쥬리미티드에디션
+                    어쩔시크릿쥬쥬리미티드에디션 <div class="audioDu"></div>
                     <button class="btn" onclick="playAudio(3);">
                         <div class="equalizer_set">
                             <span class="equalizer_bar bar1"></span>
@@ -76,8 +79,14 @@
         <audio src="audio4.mp3" style="visibility: hidden;"></audio>
         <audio src="audio5.mp3" style="visibility: hidden;"></audio>
         <div class="audio-player">
+            <!--
             <div class="timeline">
                 <div class="progress"></div>
+            </div>
+            -->
+
+            <div class="slider">
+
             </div>
             <div class="name">
                 <marquee id="marquee" >
@@ -155,25 +164,87 @@
             "audio1.mp3"
         );
 
+        function getDuration(src, cb) {
+            var audioDu = new Audio();
+            $(audioDu).on("loadedmetadata", function(){
+                cb(audioDu.duration);
+            });
+            audioDu.src = src;
+        }
+
+            for(let i = 0; i <audios.length; i++ ){
+                //console.log(audios[i].url);
+                let time;
+                let min;
+                let sec;
+                getDuration(audios[i].url, function(length) {
+
+                    min = Math.floor(length/60);
+                    sec = Math.floor(length%60);
+                    if(min>0){
+                        time = min +'분' + sec+'초';
+                    }else{
+                        time = sec+'초';
+                    }
+                    console.log(time);
+                    document.querySelectorAll('.audioDu')[i].textContent = time;
+
+                });
+            }
+
+
 
         //var networkState = audio.readystate;
         //console.log('networkState', networkState);
 
-
+        var audioTime;
         audio.addEventListener("loadeddata",() => {
             audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
-            audio.duration
+                audio.duration
             );
+            audioTime =  audio.duration;
+            console.log(audioTime);
+
             audio.volume = .75;
+
         }, false);
 
+
+
+
+
+        $('.slider').slider({
+
+            value: 0,
+            min: 0,
+            range:"min",
+            max: audioTime,
+            slide: function( event, ui ) {
+                //console.log(ui.value);
+                console.log(ui.value);
+                const timelineWidth = ui.value;
+                const timeToSeek = ui.value / 100 * audio.duration;
+                audio.currentTime = timeToSeek;
+            },
+        });
+
+
+
         //click on timeline to skip around
+        /*
         const timeline = audioPlayer.querySelector(".timeline");
+        const slierArea = $('.slider');
         timeline.addEventListener("click", e => {
             const timelineWidth = window.getComputedStyle(timeline).width;
+
             const timeToSeek = e.offsetX / parseInt(timelineWidth) * audio.duration;
+
+            console.log(timeToSeek);
             audio.currentTime = timeToSeek;
+
         }, false);
+        */
+
 
         //click volume slider to change volume
         const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
@@ -189,13 +260,33 @@
         }, false)
 
         //check audio percentage and update time accordingly
-        setInterval(() => {
-            const progressBar = audioPlayer.querySelector(".progress");
-            progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
-            audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
-            audio.currentTime
-        );
-        }, 10);
+
+        const GV = {
+            isPause: false,
+            timer: null
+        }
+        const setTimer = function(){
+            GV.isPause = false;
+            GV.timer = setInterval(function(){
+                /*
+                const progressBar = audioPlayer.querySelector(".progress");
+                progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
+                */
+                audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
+                    audio.currentTime
+                );
+
+                //console.log(audio.currentTime);
+                $('.slider').slider('value',audio.currentTime / audio.duration * 100);
+
+            }, 10);
+        };
+        const stopTimer = function(){
+            clearInterval(GV.timer);
+            GV.isPause = true;
+        };
+
+
 
         //toggle between playing and pausing on button click
         const playBtn = audioPlayer.querySelector(".controls .toggle-play");
@@ -204,10 +295,12 @@
                 playBtn.classList.remove("play");
                 playBtn.classList.add("pause");
                 play();
+
             } else {
                 playBtn.classList.remove("pause");
                 playBtn.classList.add("play");
                 pause();
+
             }
         },false);
 
@@ -248,6 +341,7 @@
             var name = audios[val].title;
             //console.log(name);
 
+
             if (url !== currentFile) {
                 audio.src = url;
                 audioName = name;
@@ -285,9 +379,7 @@
                     '</marquee>'
                 );
                 console.log(audioName);
-
-
-
+                setTimer();
         }
 
         function pause(){
@@ -295,7 +387,7 @@
             playBtn.classList.remove("pause");
             playBtn.classList.add("play");
             $('.audio_item .btn').removeClass('on');
-
+            stopTimer();
         }
 
 
